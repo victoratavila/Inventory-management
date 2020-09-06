@@ -2,11 +2,18 @@ const Products = require('../models/Products');
 
 module.exports = {
 
+
     // Function to get all registered products
 
     async getProducts(req, res) {
         await Products.findAll().then((products) => {
-            res.json(products);
+
+            if(products == null){
+                return 'There is no registered products';
+            } else {
+                res.json(products);
+            }
+
         }).catch((err) => {
             console.log(err);
         })
