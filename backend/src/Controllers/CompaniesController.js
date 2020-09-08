@@ -23,6 +23,16 @@ module.exports = {
         }).catch((err) => {
             console.log(err);
         })
+    },
+
+    async getCompanyById(req, res){
+        await Companies.findOne({ where: { id: req.params.id }}).then((company) => {
+            if(company != undefined){
+                res.json(company)
+            } else {
+                res.status(404).json({result: "company not regitered with id " + req.params.id + " yet"});
+            }
+        });
     }
 
 } 
