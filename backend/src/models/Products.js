@@ -1,5 +1,6 @@
 const { Sequelize } = require('sequelize');
 const connection = require('../database/connection');
+const Companies = require('../models/Companies');
 
 const Product = connection.define('product', {
 
@@ -45,7 +46,10 @@ const Product = connection.define('product', {
         
     }
 
+
 });
+
+Product.belongsTo(Companies);
 
 Product.sync({force: false}).then(() => {
     console.log('Table created/reloaded');
