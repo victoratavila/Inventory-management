@@ -89,6 +89,7 @@ label #cancel{
 
 /* Dashboard styles */
 
+
 .dataSquare {
   margin-left: 270px;
   background-color: rgba(255, 255, 255, 0.472);
@@ -96,6 +97,8 @@ label #cancel{
   height: 28vh;
   border-radius: 15px;
   box-sizing: border-box;
+  box-shadow: 1px 1px 10px #0000002d;
+
 }
 
 .dataViewer {
@@ -110,15 +113,15 @@ label #cancel{
 }
 
 .mainArea {
-  margin-left: 250px;
-  max-width: 100%;
+  margin-left: 270px;
+  max-width: 78.7%;
   text-align: center
 }
 
 
 
 #searchProducts {
-  width: 35vh;
+  width: 200px;
   margin-left: 60%;
 }
 

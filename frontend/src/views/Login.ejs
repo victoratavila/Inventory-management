@@ -91,24 +91,5 @@ button {
     
 </body>
 
-<script>
-   
-   function teste(){
-       var email = $('#email').val();
-       var password = $('#password').val();
-       
-       axios.post('http://localhost:8080/validation', {
-            email, password
-       }).then((res) => {
-           var token = res.data.token;
-           localStorage.setItem('token', token)
-           alert(token);
-       }).catch((err) => {
-           console.log(err);
-       })
-   }
-
-
-</script>
 
 <%- include('../public/partials/Footer.ejs') %>

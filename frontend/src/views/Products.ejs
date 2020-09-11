@@ -4,34 +4,33 @@
     
     <!-- Sidebar -->
     <div class="sidebar">
-    <header>Estoque</header>
+    <header>Store</header>
     <ul>
-    <li><a href="/dashboard"><i class="fas fa-qrcode"></i>Menu principal</a></li>
-    <li><a href="/produtos"><i class="fas fa-link"></i>Produtos</a></li>
-    <li><a href="/clientes"><i class="fas fa-stream"></i>Clientes</a></li>
-    <li><a href="#"><i class="fas fa-calendar-week"></i>Vendas</a></li>
-    <li><a href="#"><i class="far fa-question-circle"></i>About</a></li>
-    <li><a href="#"><i class="fas fa-sliders-h"></i>Services</a></li>
-    <li><a href="#"><i class="far fa-envelope"></i>Sair</a></li>
+    <li><a href="/dashboard"><i class="fa fa-bars" aria-hidden="true"></i>Menu principal</a></li>
+    <li><a href="/produtos"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Produtos</a></li>
+    <li><a href="/clientes"><i class="fa fa-user-circle-o" aria-hidden="true"></i>Clientes</a></li>
+    <li><a href="#"><i class="fa fa-money" aria-hidden="true"></i>Vendas</a></li>
+    <li><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i></i>Sair</a></li>
     </ul>
     </div>
     <section>
     
     </section>
 
-    <br>
+    
 
     <div class = "mainArea">
 
-      <br>
+      <br><br>
 
       <form class="form-inline">
         <h2 class = "productsH2" style="margin-left: 30px;">Produtos cadastrados</h2>
         <input class="form-control mr-sm-2" style="margin-left: 40%;" type="search" placeholder="Buscar produtos" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-      
+        <button class = "btn btn-primary" type = "button" onclick = "openModal()" style="margin-left: 30px; width: 140px;" > Novo produto  <i class="fa fa-plus" aria-hidden="true"></i></button>
       </form> <br>
 
+      
 
         <table class="table table-striped">
             <thead style="font-family: Roboto light" class = "thead-info">
@@ -56,10 +55,10 @@
                 <td> <%= products.amount %> </td>
                 <td> <%= products.weight %> kg </td>
                 <td>
-                   <button class = "btn btn-danger">
+                   <button class = "btn btn-danger" id = "<%= products.id %>">
                    <i class="fa fa-trash-o" aria-hidden="true"></i>
                    </button>
-                   <button class = "btn btn-warning">
+                   <button class = "btn btn-warning" id = "<%= products.id %>" >
                     <i class="fa fa-pencil" aria-hidden="true"></i></i>
                     </button>
                </td>
@@ -73,11 +72,43 @@
     
 </body>
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Adicionar novo produto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/produtos" method="POST">
+          <input class = "form-control" required type="text" name="name" id="name" placeholder="Nome do produto">
+          <input class = "form-control" required style="margin-top: 10px" type="text" name="description" id="description" placeholder="Descrição">
+          <input class = "form-control" required style="margin-top: 10px" type="text" name="category" id="category" placeholder="Categoria">
+          <input class = "form-control" required style="margin-top: 10px" type="number" name="price" id="price" placeholder="Preço">
+          <input class = "form-control" required style="margin-top: 10px" type="number" name="amount" id="amount" placeholder="Quantidade">
+          <input class = "form-control" required style="margin-top: 10px" type="number" name="weight" id="weight" placeholder="Peso">
+          <input class = "form-control" required style="margin-top: 10px" hidden type="number" name="companyId" id="companyId" value = "<%= fixedCompanyId %>" placeholder="Peso">
+          <div class="modal-footer"> <br>
+            <br>
+            <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Criar</button>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
 <script>
-
-
+  function openModal(){
+    $('#myModal').modal('show');
+}
 
 </script>
-
 
 <%- include('../public/partials/Footer.ejs') %>

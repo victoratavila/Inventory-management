@@ -12,4 +12,6 @@ router.get('/dashboard', DashboardController.getData);
 
 router.get('/produtos', ProductsController.getProducts);
 
+router.post('/produtos', ProductsController.createProduct);
+
 module.exports = router;
