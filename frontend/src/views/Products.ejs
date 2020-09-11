@@ -1,0 +1,83 @@
+<%- include('../public/partials/Header.ejs') %>
+
+<body>
+    
+    <!-- Sidebar -->
+    <div class="sidebar">
+    <header>Estoque</header>
+    <ul>
+    <li><a href="/dashboard"><i class="fas fa-qrcode"></i>Menu principal</a></li>
+    <li><a href="/produtos"><i class="fas fa-link"></i>Produtos</a></li>
+    <li><a href="/clientes"><i class="fas fa-stream"></i>Clientes</a></li>
+    <li><a href="#"><i class="fas fa-calendar-week"></i>Vendas</a></li>
+    <li><a href="#"><i class="far fa-question-circle"></i>About</a></li>
+    <li><a href="#"><i class="fas fa-sliders-h"></i>Services</a></li>
+    <li><a href="#"><i class="far fa-envelope"></i>Sair</a></li>
+    </ul>
+    </div>
+    <section>
+    
+    </section>
+
+    <br>
+
+    <div class = "mainArea">
+
+      <br>
+
+      <form class="form-inline">
+        <h2 class = "productsH2" style="margin-left: 30px;">Produtos cadastrados</h2>
+        <input class="form-control mr-sm-2" style="margin-left: 40%;" type="search" placeholder="Buscar produtos" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+      
+      </form> <br>
+
+
+        <table class="table table-striped">
+            <thead style="font-family: Roboto light" class = "thead-info">
+   
+
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Peso</th>
+                <th scope="col">Ação</th>
+              </tr>
+         
+            </thead>
+            <tbody>
+                         
+             <%  productList.forEach(products => { %>
+
+              <tr>
+                <td> <%= products.name %> </td>
+                <td> R$ <%= products.price %> </td>
+                <td> <%= products.amount %> </td>
+                <td> <%= products.weight %> kg </td>
+                <td>
+                   <button class = "btn btn-danger">
+                   <i class="fa fa-trash-o" aria-hidden="true"></i>
+                   </button>
+                   <button class = "btn btn-warning">
+                    <i class="fa fa-pencil" aria-hidden="true"></i></i>
+                    </button>
+               </td>
+              </tr>
+
+              <% }) %>
+            </tbody>
+          </table>
+    
+    </div>
+    
+</body>
+
+<script>
+
+
+
+</script>
+
+
+<%- include('../public/partials/Footer.ejs') %>

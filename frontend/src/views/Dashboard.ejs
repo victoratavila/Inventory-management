@@ -1,0 +1,51 @@
+<%- include('../public/partials/Header.ejs') %>
+
+<body>
+    
+    <!-- Sidebar -->
+    <div class="sidebar">
+    <header>Estoque</header>
+    <ul>
+    <li><a href="/dashboard"><i class="fas fa-qrcode"></i>Menu principal</a></li>
+    <li><a href="/produtos"><i class="fas fa-link"></i>Produtos</a></li>
+    <li><a href="/clientes"><i class="fas fa-stream"></i>Clientes</a></li>
+    <li><a href="#"><i class="fas fa-calendar-week"></i>Vendas</a></li>
+    <li><a href="#"><i class="far fa-question-circle"></i>About</a></li>
+    <li><a href="#"><i class="fas fa-sliders-h"></i>Services</a></li>
+    <li><a href="#"><i class="far fa-envelope"></i>Sair</a></li>
+    </ul>
+    </div>
+    <section>
+    
+    </section>
+
+    
+    
+    <br>
+
+    <div class = "dataSquare"> <br><br>
+        <div class = "dataViewer"> <%= registeredProducts.registeredProducts %> </div> <br>
+        <div class = "dataDescription">Produtos cadastrados</div>
+    </div> <br>
+
+    <div class = "dataSquare"> <br><br>
+        <div class = "dataViewer"> R$ <%= totalPrice.totalPrice %> </div> <br>
+        <div class = "dataDescription">Valor em estoque</div>
+    </div> <br>
+
+
+    <div class = "dataSquare"> <br><br>
+        <div class = "dataViewer"> <%= availableProducts.availableProducts %></div> <br>
+        <div class = "dataDescription">Unidades disponíveis</div>
+    </div> <br>
+    
+</body>
+
+<script>
+
+
+
+</script>
+
+
+<%- include('../public/partials/Footer.ejs') %>

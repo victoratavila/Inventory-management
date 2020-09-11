@@ -1,5 +1,5 @@
 const Products = require('../models/Products');
-const { searchByCompanyId } = require('./UsersController');
+const Companies = require('../models/Companies');
 
 module.exports = {
 
@@ -12,7 +12,32 @@ module.exports = {
             if(products == null){
                 return 'There is no registered products';
             } else {
-                res.json(products);
+                
+                var totalPrice = products.reduce(getTotal, 0);
+
+                function getTotal(total, item){
+                     var calc = total + (item.price * item.amount);
+                     return calc;
+                };
+
+                var availableProducts = products.reduce(getAvailable, 0);
+                function getAvailable(total, item){
+                    var calc2 = total + (item.amount);
+                    return calc2;
+                }
+
+                const extraData = [
+
+                { totalPrice: totalPrice }, 
+
+                { registeredProducts: products.length }, 
+                
+                {availableProducts: availableProducts }
+            
+                
+                ]
+
+                res.json({products: products, extraData});
             }
 
         }).catch((err) => {
@@ -24,25 +49,42 @@ module.exports = {
 
     async createProduct(req, res) {
         var { name, description, category, price, amount, weight, companyId } = req.body;
-        await Products.create({
-            name: name,
-            description: description,
-            category: category,
-            price: price,
-            amount: amount,
-            weight: weight,
-            companyId: companyId
-        }).then(() => {
-            res.json({result: 'Product successfully created'});
-        }).catch((err) => {
-            console.log(err);
-        })
+
+          Companies.findOne({ where: { id: companyId }}).then((data) => {
+
+            if(data != undefined){
+
+                Products.create({
+                name: name,
+                description: description,
+                category: category,
+                price: price,
+                amount: amount,
+                weight: weight,
+                companyId: companyId
+
+            }).then(() => {
+                res.json({result: 'Product successfully created'});
+            }).catch((err) => {
+                console.log(err);
+            })
+
+    } else {
+
+        res.json({result: `There is none registered company related to the id ${companyId} `})
+
+    }}).catch((err) => {
+        console.log(err);
+    });
+
     },
  
     // Function to search products by name
 
     async searchByName(req, res){
         var name = req.params.name;
+
+        searchByCompanyId
 
         await Products.findOne({
             where: {

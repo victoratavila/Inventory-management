@@ -2,6 +2,15 @@ const Users = require('../models/Users');
 
 module.exports = {
 
+    async getUser(req, res){
+        Users.findAll().then((users) => {
+          
+            res.json(users);
+        }).catch((err) => {
+            console.log(err);
+        })
+    },
+
     async createUser(req, res){
         const { username, email, password, companyId } = req.body;
         await Users.create({

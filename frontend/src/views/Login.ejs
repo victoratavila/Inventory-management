@@ -1,0 +1,114 @@
+<%- include('../public/partials/Header.ejs') %>
+
+<style> 
+
+h1 {
+    color: white;
+    font-size: 35px
+}
+
+body {
+    font-family: Roboto;
+    background-image: linear-gradient( #0048ca, #0076e8);
+}
+
+
+button {
+    width: 100%
+}
+
+
+form {
+    margin-top: 25vh;
+    width: 100%;
+    animation-name: form;
+    animation-duration: 1s;
+
+}
+
+form h1 {
+    text-align: left;
+    font-family: Roboto;
+    font-size: 33px;
+    color: white
+}
+
+
+p {
+    text-align: center;
+    margin-top: 20vh;
+    color: rgba(255, 255, 255, 0.911);
+    font-family: Roboto light;
+}
+
+button {
+    color: light;
+}
+
+.form-group {
+    animation-name: form;
+}
+
+.form-control {
+    height: 43px;
+    border-radius: 0;
+    animation-name: form;
+}
+
+
+@keyframes  form {
+
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    } to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+</style>
+
+<body>
+  
+    <div class = "container">
+        <div class="row"> 
+            <div class="col-md-6 offset-md-3">
+                <form>
+                <div class = "form-group"> 
+                    <h1>Informe suas credenciais de acesso.</h1> <br>
+                    <input type="text" id = "email" name = "email" class = "form-control" required placeholder="Digite seu email"> <br>
+                    <input type="password" id = "password" name = "password" class = "form-control" required placeholder="Digite sua senha">
+                    <br>
+                    <button class = "btn btn-dark" onclick="teste()" id = "btnLogin"> Acessar </button>  
+                </div>
+                </form>
+            </div>
+          </div>
+          <p>Desenvolvido por Victor Atavila</p>
+    </div>
+    
+</body>
+
+<script>
+   
+   function teste(){
+       var email = $('#email').val();
+       var password = $('#password').val();
+       
+       axios.post('http://localhost:8080/validation', {
+            email, password
+       }).then((res) => {
+           var token = res.data.token;
+           localStorage.setItem('token', token)
+           alert(token);
+       }).catch((err) => {
+           console.log(err);
+       })
+   }
+
+
+</script>
+
+<%- include('../public/partials/Footer.ejs') %>
