@@ -1,16 +1,11 @@
 const axios = require('axios');
+const slugify = require('slugify');
 
 module.exports = {
 
         async getProducts(req, res){
 
-        await axios.get('http://localhost:8080/products').then((products) => {
-            var productList = products.data.products;
-            var fixedCompanyId = 5;
-            res.render('Products.ejs', { productList, fixedCompanyId });
-         }).catch((err) => {
-             console.log(err);
-         })
+        res.redirect('/produtos/1');
 
     },
 
@@ -18,19 +13,82 @@ module.exports = {
 
         const { name, description, category, price, amount, weight, companyId } = req.body
 
+        var slugName = slugify(name, {
+            replacement: '-', 
+            lower: true, 
+        })
+
         await axios.post('http://localhost:8080/create', {
             name: name,
             description: description,
             category: category,
-            price: price,
+            price: parseFloat(price),
             amount: amount,
-            weight: weight, 
-            companyId: companyId
-        }).then(() => {
-            res.redirect('http://localhost:3000/produtos');
+            weight: parseFloat(weight), 
+            companyId: companyId,
+            slug: slugName
+        }).then((result) => {
+            res.redirect('http://localhost:3000/produtos/1');
         }).catch((err) => {
             console.log(err);
         })
+    },
+
+    async pagination(req, res){
+        var page = req.params.num;
+        
+        await axios.get('http://localhost:8080/page/'+page, {
+
+        }).then((products) => {
+
+            axios.get('http://localhost:8080/products').then((response) => {
+
+                var size = response.data.extraData[1];
+                var productList = products.data.response.rows;
+                var page = products.data.page;
+                var nextPage = products.data.next;
+                var fixedCompanyId = 5;
+    
+                res.render('Page.ejs', { productList, fixedCompanyId, size, nextPage, page })
+
+            })
+            
+           
+
+         }).catch((err) => {
+             console.log(err);
+         })
+    },
+
+    async deleteProduct(req, res){
+
+        const { id } = req.params;
+        
+        await axios.delete(`http://localhost:8080/delete/${id}`).then(() => {
+            res.redirect('/produtos/1');
+        }).catch((err) => {
+            console.log(err);
+        })
+
     }
 
-}
+    // async searchBySlug(req, res){
+
+    //     const { slug } = req.params;
+
+    //     var fixedCompanyId = 5;
+        
+    //     axios.get(`http://localhost:8080/search/${slugName}`).then((productList) => {
+    //         if(productList == null){
+    //             res.redirect('/produtos/1');
+    //         } else {
+    //             res.render('FoundProduct.ejs', { productList, fixedCompanyId});
+    //         }
+    //     }).catch((err) => {
+    //         console.log(err);
+    //     })
+
+
+    // } 
+
+};

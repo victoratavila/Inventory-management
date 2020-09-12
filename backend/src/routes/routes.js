@@ -11,12 +11,13 @@ const Users = require('../models/Users');
 // Product routes
 router.get('/products', ProductController.getProducts);
 router.post('/create', ProductController.createProduct);
-router.get('/search/:name', ProductController.searchByName);
+router.get('/search/:slug', ProductController.searchByName);
 router.delete('/delete/:id', ProductController.deleteProduct);
 router.put('/update/:id', ProductController.updateProduct);
 router.put('/amount/:id', ProductController.updateAmount);
 router.get('/report', ProductController.reportData);
 router.get('/products/:companyId', ProductController.searchByCompanyId);
+router.get('/page/:num', ProductController.pagination);
 
 // Company routes
 router.post('/company', CompanyController.registerCompany );

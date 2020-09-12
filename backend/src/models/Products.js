@@ -25,9 +25,14 @@ const Product = connection.define('product', {
         
     }, 
 
+    slug:  {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+
     price: {
         
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false
         
     },
@@ -41,7 +46,7 @@ const Product = connection.define('product', {
 
     weight: {
         
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false
         
     }

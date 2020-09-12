@@ -1,5 +1,6 @@
 const Products = require('../models/Products');
 const Companies = require('../models/Companies');
+const slugify = require('slugify');
 
 module.exports = {
 
@@ -7,7 +8,11 @@ module.exports = {
     // Function to get all registered products
 
     async getProducts(req, res) {
-        await Products.findAll().then((products) => {
+        await Products.findAll({
+            order: [
+                ['id', 'DESC']
+            ]
+        }).then((products) => {
 
             if(products == null){
                 return 'There is no registered products';
@@ -48,7 +53,7 @@ module.exports = {
     // Function to create new products
 
     async createProduct(req, res) {
-        var { name, description, category, price, amount, weight, companyId } = req.body;
+        var { name, description, category, slug, price, amount, weight, companyId } = req.body;
 
           Companies.findOne({ where: { id: companyId }}).then((data) => {
 
@@ -58,6 +63,7 @@ module.exports = {
                 name: name,
                 description: description,
                 category: category,
+                slug: slug,
                 price: price,
                 amount: amount,
                 weight: weight,
@@ -82,16 +88,21 @@ module.exports = {
     // Function to search products by name
 
     async searchByName(req, res){
-        var name = req.params.name;
+        var name = req.params.slug;
 
-        searchByCompanyId
+        var slugName = slugify(name, {
+            replacement: '-', 
+            lower: true, 
+        })
 
         await Products.findOne({
             where: {
-                name: name
+                slug: slugName
             }
-        }).then(product => {
-            res.json(product);
+        }).then((product) => {
+
+        res.json(product);
+
         }).catch((err) => {
             console.log(err);
         })
@@ -148,7 +159,8 @@ module.exports = {
                     category: req.body.category,
                     price: req.body.price,
                     amount: req.body.amount,
-                    weight: req.body.weight
+                    weight: req.body.weight,
+                    slug: req.body.slug,
                 }, {where: {id: id}}
 
                 ).then(() => {
@@ -180,6 +192,7 @@ module.exports = {
                     description: product.description,
                     category: product.category,
                     price: product.price,
+                    slug: product.slug,
                     amount: amount,
                     weight: product.weight
                    
@@ -220,6 +233,43 @@ module.exports = {
         }).catch((err) => {
             console.log(err);
         })
+    },
+
+    async pagination(req, res) {
+
+       var page = req.params.num;
+       var offset = 0;
+
+       if(isNaN(page) || page == 1){
+           offset = 0;
+       } else {
+           offset = (parseInt(page) -1 ) * 6;
+       }
+
+       await Products.findAndCountAll({
+           limit: 6,
+           offset: offset,
+           order: [
+            ['id', 'DESC']
+        ],
+       }).then((products) => {
+           var next;
+
+           if(offset + 6 >= products.count){
+               next = false;
+           } else {
+               next = true;
+           }
+       
+           var result = {
+               page: parseInt(page),
+               next: next,
+               response: products
+           }
+
+           res.json(result);
+       });
+   
     }
 }
 
