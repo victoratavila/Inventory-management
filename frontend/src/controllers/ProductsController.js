@@ -48,6 +48,7 @@ module.exports = {
                 var page = products.data.page;
                 var nextPage = products.data.next;
                 var fixedCompanyId = 5;
+
     
                 res.render('Page.ejs', { productList, fixedCompanyId, size, nextPage, page })
 
@@ -70,6 +71,47 @@ module.exports = {
             console.log(err);
         })
 
+    }, 
+    
+        async foundProduct(req, res){
+
+        const slug = req.params.slug;
+
+     
+        axios.get(`http://localhost:8080/search/${slug}`).then((products) => {
+
+            var data = products.data;
+            var fixedCompanyId = 5;
+
+            axios.get('http://localhost:8080/products').then((response) => {
+
+                var size = response.data.extraData[1];
+                // var productList = products.data.response.rows;
+                // var page = products.data.page;
+                // var nextPage = products.data.next;
+                // var fixedCompanyId = 5;
+
+                console.log(data);
+          
+                if(data == null || data == " "){
+                    res.render('notFoundProduct.ejs', {slug, size});
+                 } else {
+                     res.render('foundProduct.ejs', { data, fixedCompanyId, size });
+                 }
+       
+
+            }).catch((err) => {
+                console.log(err);
+            })
+
+       
+
+  
+        }).catch((err) => {
+            console.log(err);
+        });
+
+     
     }
 
     // async searchBySlug(req, res){

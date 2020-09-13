@@ -32,7 +32,7 @@ const Product = connection.define('product', {
 
     price: {
         
-        type: Sequelize.FLOAT,
+        type: Sequelize.DECIMAL(10, 2),
         allowNull: false
         
     },
@@ -56,7 +56,7 @@ const Product = connection.define('product', {
 
 Product.belongsTo(Companies);
 
-Product.sync({force: false}).then(() => {
+Product.sync({force: false  }).then(() => {
 }).catch((err) => {
     console.log(err);
 });

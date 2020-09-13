@@ -16,6 +16,8 @@ router.post('/produtos', ProductsController.createProduct);
 
 router.get('/produtos/:num', ProductsController.pagination);
 
+router.get('/buscar/:slug', ProductsController.foundProduct);
+
 router.post('/produtos/delete/:id', ProductsController.deleteProduct);
 
 // router.get('/buscar/:slug', ProductsController.searchBySlug);

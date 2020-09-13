@@ -93,12 +93,22 @@ label #cancel{
 .dataSquare {
   margin-left: 270px;
   background-color: rgba(255, 255, 255, 0.472);
-  width: 28vh;
+  width: 45vh;
   height: 28vh;
   border-radius: 15px;
   box-sizing: border-box;
   box-shadow: 1px 1px 10px #0000002d;
 
+}
+
+.dataSquare2 {
+  margin-left: 50px;
+  background-color: rgba(255, 255, 255, 0.472);
+  width: 45vh;
+  height: 28vh;
+  border-radius: 15px;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 10px #0000002d;
 }
 
 .dataViewer {
@@ -138,3 +148,8 @@ thead {
   background-color: #042331;
   color: white;
 }
+
+.align { 
+  margin-right: 20vh;
+}
+

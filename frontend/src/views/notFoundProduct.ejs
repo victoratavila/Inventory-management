@@ -1,0 +1,100 @@
+<%- include('../public/partials/Header.ejs') %>
+
+<body>
+
+<%- include('../public/partials/Sidebar.ejs') %>
+    
+
+    <div class = "mainArea">
+
+      <br><br>
+
+      <div class="form-inline">
+        <div class = "col col-12">
+            <h2 style="float: left;">Produtos cadastrados <i style="font-family: Roboto; color: rgba(0, 0, 0, 0.219); font-size: 20px">(<%= size.registeredProducts  %>)</i></h2> <br><br>
+       
+    
+          
+
+        </div> 
+
+       
+        <div class = "col col-12">
+          <button class = "btn btn-primary" type = "button" onclick = "openModal()" style="float: left; width: 160px;" > Novo produto <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+          </svg></button>
+
+          
+          <button class="btn btn-outline-success my-2 my-sm-0" type="button" style="float: right;" onclick="teste()" >Buscar</button>
+          <input class="form-control mr-sm-2" style="float: right;" id = "productToSearch" type="search" autocomplete="off" placeholder="Buscar produtos" aria-label="Search">
+       
+           
+          
+        </div>
+      </div>
+   
+
+      <br>
+
+      
+
+        <table class="table table-striped">
+            <thead style="font-family: Roboto light" class = "thead-info">
+   
+
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Peso</th>
+                <th scope="col">Ação</th>
+              </tr>
+         
+            </thead>
+            <tbody>
+             
+          
+      
+          
+            </tbody>
+          </table>
+
+          <div class = "row">
+
+         
+
+    
+    </div>
+
+ 
+    <div class="alert alert-danger" role="alert">
+        <h4 style="text-align: left">Atenção</h4> <hr>
+        <p style = "text-align: left">Não há nenhum produto cadastrado com o nome buscado, verifique sua busca e tente novamente. </p>
+      </div>
+    
+</body>
+
+<script>
+    function teste(){
+  const search = $('#productToSearch').val();
+
+  const slug = slugify(search, {
+      replacement: '-', 
+      lower: true, 
+  })
+
+
+  axios.get(`http://localhost:8080/search/${slug}`).then((product) => {
+
+    window.location.href = `http://localhost:3000/buscar/${slug}`;
+    res.render('foundProduct.ejs')
+    console.log(product);
+    
+  }).catch((err) => {
+    console.log(err);
+  })
+
+}
+</script>
+
+<%- include('../public/partials/Footer.ejs') %>

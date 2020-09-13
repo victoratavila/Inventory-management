@@ -1,76 +1,239 @@
 <%- include('../public/partials/Header.ejs') %>
 
 <body>
-    
-    <!-- Sidebar -->
-    <div class="sidebar">
-    <header>Store</header>
-    <ul>
-    <li><a href="/dashboard"><i class="fa fa-bars" aria-hidden="true"></i>Menu principal</a></li>
-    <li><a href="/produtos/1"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Produtos</a></li>
-    <li><a href="/clientes"><i class="fa fa-user-circle-o" aria-hidden="true"></i>Clientes</a></li>
-    <li><a href="#"><i class="fa fa-money" aria-hidden="true"></i>Vendas</a></li>
-    <li><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i></i>Sair</a></li>
-    </ul>
-    </div>
-    <section>
-    
-    </section>
 
+<%- include('../public/partials/Sidebar.ejs') %>
     
 
     <div class = "mainArea">
 
       <br><br>
 
-      <form class="form-inline">
-        <h2 class = "productsH2" style="margin-left: 30px;">Produtos cadastrados <i style="font-family: Roboto; color: rgba(0, 0, 0, 0.219); font-size: 20px">(<%= productList.length  %>)</i></h2>
-        <input class="form-control mr-sm-2" style="margin-left: 38%;" type="search" placeholder="Buscar produtos" aria-label="Search">
-        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-        <button class = "btn btn-primary" type = "button" onclick = "openModal()" style="margin-left: 30px; width: 140px;" > Novo produto  <i class="fa fa-plus" aria-hidden="true"></i></button>
-      </form> <br>
+      <div class="form-inline">
+        <div class = "col col-12">
+          <h2 style="float: left;">Produtos cadastrados <i style="font-family: Roboto; color: rgba(0, 0, 0, 0.219); font-size: 20px">(<%= size.registeredProducts  %>)</i></h2> <br><br>
+       
+    
+          
+
+        </div> 
+
+       
+        <div class = "col col-12">
+          <button class = "btn btn-primary" type = "button" onclick = "openModal()" style="float: left; width: 160px;" > Novo produto <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+          </svg></button>
+
+          
+          <button class="btn btn-outline-success my-2 my-sm-0" type="button" style="float: right;" onclick="teste()" >Buscar</button>
+          <input class="form-control mr-sm-2" style="float: right;" id = "productToSearch" type="search" autocomplete="off" placeholder="Buscar produtos" aria-label="Search">
+       
+           
+          
+        </div>
+      </div>
+   
+
+      <br>
 
       
+
+        <table class="table table-striped">
+            <thead style="font-family: Roboto light" class = "thead-info">
+   
+
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Peso</th>
+                <th scope="col">Ação</th>
+              </tr>
+         
+            </thead>
+            <tbody>
+             
+    
+                <tr>
+                  <td> <%= data.name %> </td>
+                  <td> R$ <%= data.price %> </td>
+                  <td> <%= data.amount %> </td>
+                  <td> <%= data.weight %> kg </td>
+                  <td>
+  
+                    <form action="/produtos/delete/<%= data.id %>" onsubmit="verifyDeletion(event, this)" method="POST" style="display: inline;">
+                   
+                      <button type="submit" class = "btn btn-danger" name = "idArea" id = "<%= data.id %>">
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                      </svg>
+                    </button>
+  
+                  </form>
+                  
+                     <button type="button" class = "btn btn-warning" onclick="verifyUpdating(this)" name = "updateBtn" data-updateid ='<%= data. id %>' >
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                      </svg>
+                    </button>
+              
+                 </td>
+                </tr>
+
+
+          
+            </tbody>
+          </table>
+
+          <div class = "row">
+
+         
+
+    
+    </div>
+
+ 
 
     
 </body>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Adicionar novo produto</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="/produtos" method="POST">
-          <input class = "form-control" required type="text" name="name" id="name" placeholder="Nome do produto">
-          <input class = "form-control" required style="margin-top: 10px" type="text" name="description" id="description" placeholder="Descrição">
-          <input class = "form-control" required style="margin-top: 10px" type="text" name="category" id="category" placeholder="Categoria">
-          <input class = "form-control" required style="margin-top: 10px" type="number" name="price" id="price" placeholder="Preço">
-          <input class = "form-control" required style="margin-top: 10px" type="number" name="amount" id="amount" placeholder="Quantidade">
-          <input class = "form-control" required style="margin-top: 10px" type="number" name="weight" id="weight" placeholder="Peso">
-          <input class = "form-control" required style="margin-top: 10px" hidden type="number" name="companyId" id="companyId" value = "<%= fixedCompanyId %>" placeholder="Peso">
-          <div class="modal-footer"> <br>
-            <br>
-            <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Criar</button>
-          </div>
-        </form>
-      </div>
-      
-    </div>
-  </div>
-</div>
 
+<%- include('../public/partials/newProductModal.ejs') %>
+<%- include('../public/partials/deleteCategoryModal.ejs') %>
 
 <script>
   function openModal(){
     $('#myModal').modal('show');
 }
+
+</script>
+
+<script>
+
+  function verifyDeletion(event, form){
+    event.preventDefault();
+    $('#myDeleteModal').modal('show');
+
+    var deleteBtn = document.getElementById('delete');
+  
+    deleteBtn.addEventListener('click', () => {
+      form.submit();
+    })
+
+  }
+
+
+  function verifyUpdating(identifier){     
+  
+  const id = $(identifier).data('updateid');
+  axios.get(`http://localhost:8080/product/${id}`).then((product) => {
+
+  var data = product.data;
+
+    $("body").append(`<div class="modal fade" id="updateModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="staticBackdropLabel">Editar produto</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div> 
+  <div class="modal-body">
+    <form action="/produtos" method="POST">
+    
+      <input class = "form-control" required type="text" value = "${data.name}" name="newname" id="newname" placeholder="Nome do produto">
+      <input class = "form-control" required  value = "${data.description}"  style="margin-top: 10px" type="text" name="newdescription" id="newdescription" placeholder="Descrição">
+      <input class = "form-control" required  value = "${data.category}"  style="margin-top: 10px" type="text" name="newcategory" id="newcategory" placeholder="Categoria">
+      <input class = "form-control" required  value = "${data.price}"  style="margin-top: 10px" type="text" name="newprice" id="newprice" placeholder="Preço">
+      <input class = "form-control" required  value = "${data.amount}"  style="margin-top: 10px" type="text" name="newamount" id="newamount" placeholder="Quantidade">
+      <input class = "form-control" required  value = "${data.weight}"  style="margin-top: 10px" type="text" name="newweight" id="newweight" placeholder="Peso">
+      <input class = "form-control" required value = "${data.companyId}" style="margin-top: 10px" hidden type="number" name="companyId" id="newcompanyId" value = "<%= fixedCompanyId %>" placeholder="Peso">
+      <div class="modal-footer"> <br>
+        <br>
+        <button type="submit" class="btn btn-secondary" data-dismiss="modal" id = "cancelUpdate">Cancelar</button>
+        <button type="submit" class="btn btn-warning" id = "finishUpdate">Atualizar produto</button>
+      </div>
+    </form>
+  </div>
+  
+</div>
+</div>
+</div>`);
+   
+    $('#updateModal').modal('show');
+
+    var btnCancelUpdate = document.getElementById('cancelUpdate');
+    btnCancelUpdate.addEventListener('click', () => {
+
+      var info = document.getElementById("updateModal");
+      if (info.parentNode) {
+      info.parentNode.removeChild(info);
+      }
+
+    })
+
+    var buttonUpdate = document.getElementById('finishUpdate');
+
+    buttonUpdate.addEventListener('click', () => {
+
+      var name = $('#newname').val();
+      var description = $('#newdescription').val();
+      var price = $('#newprice').val();
+      var slug = name;
+      var amount = $('#newamount').val();
+      var weight = $('#newweight').val();
+      var companyId = $('#companyId').val();
+
+      axios.put(`http://localhost:8080/update/${data.id}`, {
+
+        name: name,
+        description: description,
+        price: price,
+        slug: name,
+        amount: amount,
+        weight: weight,
+        companyId: data.companyId
+
+      }).then(() => {
+        window.location.href = "http://localhost:3000/produtos/1";
+      }).catch((err) => {
+        console.log(err);
+      })
+
+    })
+
+  }).catch((err) => {
+    console.log(err);
+  })
+
+}
+
+
+function teste(){
+  const search = $('#productToSearch').val();
+
+  const slug = slugify(search, {
+      replacement: '-', 
+      lower: true, 
+  })
+
+
+  axios.get(`http://localhost:8080/search/${slug}`).then((product) => {
+
+    window.location.href = `http://localhost:3000/buscar/${slug}`;
+    res.render('foundProduct.ejs')
+    console.log(product);
+    
+  }).catch((err) => {
+    console.log(err);
+  })
+
+}
+ 
+
 
 </script>
 

@@ -11,7 +11,7 @@
 
       <div class="form-inline">
         <div class = "col col-12">
-          <h2 style="float: left;">Produtos cadastrados <i style="font-family: Roboto; color: rgba(0, 0, 0, 0.219); font-size: 20px">(<%= size.registeredProducts  %>)</i></h2>
+          <h2 style="float: left;">Produtos cadastrados <i style="font-family: Roboto; color: rgba(0, 0, 0, 0.219); font-size: 20px">(<%= size.registeredProducts  %>)</i></h2> <br><br>
        
     
 
@@ -25,7 +25,7 @@
 
           
           <button class="btn btn-outline-success my-2 my-sm-0" type="button" style="float: right;" onclick="teste()" >Buscar</button>
-          <input class="form-control mr-sm-2" style="float: right;" id = "productToSearch" type="search" placeholder="Buscar produtos" aria-label="Search">
+          <input class="form-control mr-sm-2" style="float: right;" id = "productToSearch" type="search" autocomplete="off" placeholder="Buscar produtos" aria-label="Search">
        
            
           
@@ -145,97 +145,114 @@
   }
 
 
-  
-
-
   function verifyUpdating(identifier){     
   
-      const id = $(identifier).data('updateid');
-      axios.get(`http://localhost:8080/product/${id}`).then((product) => {
+  const id = $(identifier).data('updateid');
+  axios.get(`http://localhost:8080/product/${id}`).then((product) => {
 
-        var data = product.data;
-        console.log(data);
+  var data = product.data;
 
-        $("body").append(`<div class="modal fade" id="updateModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Editar produto</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div> 
-      <div class="modal-body">
-        <form action="/produtos" method="POST">
-        
-          <input class = "form-control" required type="text" value = "${data.name}" name="newname" id="newname" placeholder="Nome do produto">
-          <input class = "form-control" required  value = "${data.description}"  style="margin-top: 10px" type="text" name="newdescription" id="newdescription" placeholder="Descrição">
-          <input class = "form-control" required  value = "${data.category}"  style="margin-top: 10px" type="text" name="newcategory" id="newcategory" placeholder="Categoria">
-          <input class = "form-control" required  value = "${data.price}"  style="margin-top: 10px" type="text" name="newprice" id="newprice" placeholder="Preço">
-          <input class = "form-control" required  value = "${data.amount}"  style="margin-top: 10px" type="text" name="newamount" id="newamount" placeholder="Quantidade">
-          <input class = "form-control" required  value = "${data.weight}"  style="margin-top: 10px" type="text" name="newweight" id="newweight" placeholder="Peso">
-          <input class = "form-control" required value = "${data.companyId}" style="margin-top: 10px" hidden type="number" name="companyId" id="newcompanyId" value = "<%= fixedCompanyId %>" placeholder="Peso">
-          <div class="modal-footer"> <br>
-            <br>
-            <button type="submit" class="btn btn-secondary" data-dismiss="modal" id = "cancelUpdate">Cancelar</button>
-            <button type="submit" class="btn btn-warning" id = "finishUpdate">Atualizar produto</button>
-          </div>
-        </form>
+    $("body").append(`<div class="modal fade" id="updateModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="staticBackdropLabel">Editar produto</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div> 
+  <div class="modal-body">
+    <form action="/produtos" method="POST">
+    
+      <input class = "form-control" required type="text" value = "${data.name}" name="newname" id="newname" placeholder="Nome do produto">
+      <input class = "form-control" required  value = "${data.description}"  style="margin-top: 10px" type="text" name="newdescription" id="newdescription" placeholder="Descrição">
+      <input class = "form-control" required  value = "${data.category}"  style="margin-top: 10px" type="text" name="newcategory" id="newcategory" placeholder="Categoria">
+      <input class = "form-control" required  value = "${data.price}"  style="margin-top: 10px" type="text" name="newprice" id="newprice" placeholder="Preço">
+      <input class = "form-control" required  value = "${data.amount}"  style="margin-top: 10px" type="text" name="newamount" id="newamount" placeholder="Quantidade">
+      <input class = "form-control" required  value = "${data.weight}"  style="margin-top: 10px" type="text" name="newweight" id="newweight" placeholder="Peso">
+      <input class = "form-control" required value = "${data.companyId}" style="margin-top: 10px" hidden type="number" name="companyId" id="newcompanyId" value = "<%= fixedCompanyId %>" placeholder="Peso">
+      <div class="modal-footer"> <br>
+        <br>
+        <button type="submit" class="btn btn-secondary" data-dismiss="modal" id = "cancelUpdate">Cancelar</button>
+        <button type="submit" class="btn btn-warning" id = "finishUpdate">Atualizar produto</button>
       </div>
-      
-    </div>
+    </form>
   </div>
+  
+</div>
+</div>
 </div>`);
-       
-        $('#updateModal').modal('show');
+   
+    $('#updateModal').modal('show');
 
-        var btnCancelUpdate = document.getElementById('cancelUpdate');
-        btnCancelUpdate.addEventListener('click', () => {
+    var btnCancelUpdate = document.getElementById('cancelUpdate');
+    btnCancelUpdate.addEventListener('click', () => {
 
-          var info = document.getElementById("updateModal");
-          if (info.parentNode) {
-          info.parentNode.removeChild(info);
-          }
+      var info = document.getElementById("updateModal");
+      if (info.parentNode) {
+      info.parentNode.removeChild(info);
+      }
 
-        })
+    })
 
-        var buttonUpdate = document.getElementById('finishUpdate');
+    var buttonUpdate = document.getElementById('finishUpdate');
 
-        buttonUpdate.addEventListener('click', () => {
+    buttonUpdate.addEventListener('click', () => {
 
-          var name = $('#newname').val();
-          var description = $('#newdescription').val();
-          var price = $('#newprice').val();
-          var slug = name;
-          var amount = $('#newamount').val();
-          var weight = $('#newweight').val();
-          var companyId = $('#companyId').val();
+      var name = $('#newname').val();
+      var description = $('#newdescription').val();
+      var price = $('#newprice').val();
+      var slug = name;
+      var amount = $('#newamount').val();
+      var weight = $('#newweight').val();
+      var companyId = $('#companyId').val();
 
-          console.log(name, description, price, slug, amount, weight, companyId);
+      axios.put(`http://localhost:8080/update/${data.id}`, {
 
-          axios.put(`http://localhost:8080/update/${data.id}`, {
+        name: name,
+        description: description,
+        price: price,
+        slug: name,
+        amount: amount,
+        weight: weight,
+        companyId: data.companyId
 
-            name: name,
-            description: description,
-            price: price,
-            slug: name,
-            amount: amount,
-            weight: weight,
-            companyId: data.companyId
-
-          }).then(() => {
-            window.location.href = "http://localhost:3000/produtos/1";
-          }).catch((err) => {
-            console.log(err);
-          })
-
-        })
-
+      }).then(() => {
+        window.location.href = "http://localhost:3000/produtos/1";
       }).catch((err) => {
         console.log(err);
       })
 
-  }
+    })
+
+  }).catch((err) => {
+    console.log(err);
+  })
+
+}
+
+
+function teste(){
+  const search = $('#productToSearch').val();
+
+  const slug = slugify(search, {
+      replacement: '-', 
+      lower: true, 
+  })
+
+
+  axios.get(`http://localhost:8080/search/${slug}`).then((product) => {
+
+    window.location.href = `http://localhost:3000/buscar/${slug}`;
+    res.render('foundProduct.ejs')
+    console.log(product);
+    
+  }).catch((err) => {
+    console.log(err);
+  })
+
+}
+ 
 
 
 </script>

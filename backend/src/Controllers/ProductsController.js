@@ -109,14 +109,9 @@ module.exports = {
     async searchByName(req, res){
         var name = req.params.slug;
 
-        var slugName = slugify(name, {
-            replacement: '-', 
-            lower: true, 
-        })
-
         await Products.findOne({
             where: {
-                slug: slugName
+                slug: name
             }
         }).then((product) => {
 
