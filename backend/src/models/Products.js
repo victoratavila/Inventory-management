@@ -57,7 +57,6 @@ const Product = connection.define('product', {
 Product.belongsTo(Companies);
 
 Product.sync({force: false}).then(() => {
-    console.log('Table created/reloaded');
 }).catch((err) => {
     console.log(err);
 });

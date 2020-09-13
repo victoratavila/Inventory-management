@@ -50,6 +50,25 @@ module.exports = {
         })
     },
 
+    async searchById(req, res){
+        
+        const { id } = req.params;
+
+        Products.findOne({
+            where: {
+                id: id
+            }
+        }).then((product) => {
+            if(product == null) {
+                res.status(400);
+            } else {
+                res.json(product);
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    },
+
     // Function to create new products
 
     async createProduct(req, res) {
@@ -153,14 +172,21 @@ module.exports = {
                 res.status(400).json({result: "There is no product related to this id to be updated"});
             } else {
 
+                var name = req.body.name;
+
+                var slug = slugify(name, {
+                    replacement: '-', 
+                    lower: true, 
+                })
+
                 Products.update({
-                    name: req.body.name,
+                    name: name,
                     description: req.body.description,
                     category: req.body.category,
                     price: req.body.price,
                     amount: req.body.amount,
                     weight: req.body.weight,
-                    slug: req.body.slug,
+                    slug: slug,
                 }, {where: {id: id}}
 
                 ).then(() => {

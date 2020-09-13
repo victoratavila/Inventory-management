@@ -28,7 +28,6 @@ const Company = connection.define('company', {
 });
 
 Company.sync({force: false}).then(() => {
-    console.log('Table created/reloaded');
 }).catch((err) => {
     console.log(err);
 });

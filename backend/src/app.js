@@ -2,9 +2,6 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const routes = require('./routes/routes');
-const connection = require('./database/connection');
-const authentication = require('./database/authentication');
-const path = require('path');
 
 // Setting cors
 app.use(cors());
@@ -18,5 +15,5 @@ app.use(routes);
 
 // Server listener
 app.listen(8080, (req, res) => {
-    console.log('The server is running');
+    console.log('The backend server is running');
 })

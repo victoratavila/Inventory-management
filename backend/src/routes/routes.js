@@ -18,6 +18,7 @@ router.put('/amount/:id', ProductController.updateAmount);
 router.get('/report', ProductController.reportData);
 router.get('/products/:companyId', ProductController.searchByCompanyId);
 router.get('/page/:num', ProductController.pagination);
+router.get('/product/:id', ProductController.searchById);
 
 // Company routes
 router.post('/company', CompanyController.registerCompany );
