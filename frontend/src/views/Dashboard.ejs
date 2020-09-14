@@ -2,12 +2,41 @@
 
 <body>
     
-  <%- include('../public/partials/Sidebar.ejs') %>
-    </section>
+<%- include('../public/partials/Sidebar.ejs') %>
+</section>
 
     
-    
-    <br>
+<div class = "mainArea"> <br>
+ 
+ <div class = "largeSquare form-inline">
+
+      <div class = "viewSquare">
+        <br><br>
+        <h1 style="margin-left: 30px; margin-top: 10px; font-weight: bold;"><%= registeredProducts.registeredProducts %></h1> 
+        
+        <h5 style="font-family: Roboto light; margin-left: 30px;">Produtos cadastrados</h5>
+      </div>
+
+       <div class = "viewSquare2">
+        <br><br>
+
+        <h1 style="margin-left: 30px; margin-top: 10px; font-weight: bold;"><%= availableProducts.availableProducts %></h1> 
+        
+        <h5 style="font-family: Roboto light; margin-left: 30px;">Produtos disponíveis</h5>
+      </div>
+
+      <div class = "viewSquare2">
+        <br><br>
+
+        <h1 style="margin-left: 30px; margin-top: 10px; font-weight: bold;"><i style="font-style: normal; font-size: 20px; font-weight: lighter">R$ </i><%= totalPrice.totalPrice %></h1> 
+        
+        <h5 style="font-family: Roboto light; margin-left: 30px;">Valor em estoque</h5>
+      </div>
+
+
+ </div>
+
+</div>
 
     
 

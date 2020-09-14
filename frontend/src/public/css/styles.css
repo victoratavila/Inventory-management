@@ -90,45 +90,37 @@ label #cancel{
 /* Dashboard styles */
 
 
-.dataSquare {
-  margin-left: 270px;
-  background-color: rgba(255, 255, 255, 0.472);
-  width: 45vh;
-  height: 28vh;
-  border-radius: 15px;
-  box-sizing: border-box;
-  box-shadow: 1px 1px 10px #0000002d;
-
-}
-
-.dataSquare2 {
-  margin-left: 50px;
-  background-color: rgba(255, 255, 255, 0.472);
-  width: 45vh;
-  height: 28vh;
-  border-radius: 15px;
-  box-sizing: border-box;
-  box-shadow: 1px 1px 10px #0000002d;
-}
-
-.dataViewer {
-  font-family: 'Roboto';
-  text-align: center;
-  font-size: 35px;
-  font-weight: 800;
-}
-
-.dataDescription {
-  text-align: center;
-}
-
 .mainArea {
   margin-left: 270px;
   max-width: 78.7%;
   text-align: center
 }
 
+.largeSquare {
+  background: #ffffff93;
+  color: #0a5275;
+  height: 30vh;
+  border-radius: 20px;
+  box-shadow: 1px 1px 10px #0000001f;
+}
 
+.viewSquare {
+  text-align: center;
+  background:  #f1f1f100;
+  width: 45vh;
+  height: 30vh;
+  border-radius: 30px
+}
+
+
+.viewSquare2 {
+  text-align: center;
+  background:  #f1f1f100 ;
+  width: 45vh;
+  height: 30vh;
+  margin-left: 65px;
+  border-radius: 30px
+}
 
 #searchProducts {
   width: 200px;
@@ -148,8 +140,3 @@ thead {
   background-color: #042331;
   color: white;
 }
-
-.align { 
-  margin-right: 20vh;
-}
-
