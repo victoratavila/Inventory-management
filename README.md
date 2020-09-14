@@ -19,3 +19,4 @@ Software desevolvido com o intuito de relacionar empresas e suas respectivas inf
 - [ ] Gerar JWT
 - [ ] Validar JWT
 - [ ] Receber dados pertencentes a empresa respectiva do usuário logado através de dados recebidos pelo JWT.
+- [ ] Gerar relatórios em EXCEL e HTML.
