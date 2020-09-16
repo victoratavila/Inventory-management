@@ -4,9 +4,10 @@ const Product = require('../models/Products');
 const ProductController = require('../Controllers/ProductsController');
 const CompanyController = require('../Controllers/CompaniesController');
 const UsersController = require('../Controllers/UsersController');
-const LoginController = require('../Controllers/LoginController');
+const ClientController = require('../Controllers/ClientController');
 const Company = require('../models/Companies');
 const Users = require('../models/Users');
+const Clients = require('../models/Clients');
 
 // Product routes
 router.get('/products', ProductController.getProducts);
@@ -30,7 +31,10 @@ router.get('/user', UsersController.getUser);
 router.post('/user', UsersController.createUser);
 router.get('/user/:companyId', UsersController.searchByCompanyId);
 
-// // Authentication for login
-// router.post('/validation', LoginController.validation);
+// Client routes
+router.get('/clients', ClientController.getClients);
+router.post('/clients', ClientController.createClient);
+router.put('/clients', ClientController.updateClient);
+router.delete('/clients/:cpf', ClientController.deleteClient);
 
 module.exports = router;

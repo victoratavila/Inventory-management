@@ -33,7 +33,7 @@ module.exports = {
 
                 const extraData = [
 
-                { totalPrice: totalPrice }, 
+                { totalPrice: totalPrice.toFixed(2) }, 
 
                 { registeredProducts: products.length }, 
                 
@@ -42,10 +42,12 @@ module.exports = {
                 
                 ]
 
+                res.status(200);
                 res.json({products: products, extraData});
             }
 
         }).catch((err) => {
+            res.status(400);
             console.log(err);
         })
     },
@@ -90,7 +92,9 @@ module.exports = {
 
             }).then(() => {
                 res.json({result: 'Product successfully created'});
+                res.status(200);
             }).catch((err) => {
+                res.status(400);
                 console.log(err);
             })
 
@@ -187,6 +191,7 @@ module.exports = {
                 ).then(() => {
                     res.json({result: `The product ${product.name} was successfully updated`});
                 }).catch((err) => {
+                    res.status(400);
                     console.log(err);
                 })
             }

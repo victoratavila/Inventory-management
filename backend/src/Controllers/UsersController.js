@@ -3,7 +3,11 @@ const Users = require('../models/Users');
 module.exports = {
 
     async getUser(req, res){
-        Users.findAll().then((users) => {
+        Users.findAll({
+            order: [
+                ['id', 'DESC']
+            ]
+        }).then((users) => {
           
             res.json(users);
         }).catch((err) => {
