@@ -96,8 +96,13 @@ label #cancel{
   text-align: center
 }
 
+.mainAreaGeneral {
+  margin-left: 270px;
+  max-width: 78.7%;
+}
+
 .largeSquare {
-  background: #ffffff93;
+  background: #ffffffc9;
   color: #0a5275;
   height: 30vh;
   border-radius: 20px;
@@ -139,4 +144,10 @@ label #cancel{
 thead {
   background-color: #042331;
   color: white;
+}
+
+.imgClient {
+
+  height: 60px;
+
 }

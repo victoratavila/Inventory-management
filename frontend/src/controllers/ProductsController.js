@@ -52,6 +52,8 @@ module.exports = {
     
                 res.render('Page.ejs', { productList, fixedCompanyId, size, nextPage, page })
 
+            }).catch((err) => {
+                console.log(err);
             })
             
            
@@ -89,9 +91,6 @@ module.exports = {
                 // var productList = products.data.response.rows;
                 // var page = products.data.page;
                 // var nextPage = products.data.next;
-                // var fixedCompanyId = 5;
-
-                console.log(data);
           
                 if(data == null || data == " "){
                     res.render('notFoundProduct.ejs', {slug, size});
@@ -103,8 +102,6 @@ module.exports = {
             }).catch((err) => {
                 console.log(err);
             })
-
-       
 
   
         }).catch((err) => {

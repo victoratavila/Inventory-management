@@ -33,7 +33,6 @@ module.exports = {
 
     async updateClient(req, res){
         const { fullName, cpf, email, companyId } = req.body;
-        console.log(cpf);
         Clients.findOne({ 
             where: {
                 cpf: cpf
@@ -80,6 +79,21 @@ module.exports = {
         }).then(() => {
             res.json({result: 'Client deleted successfully'});
             res.status(200);
+        }).catch((err) => {
+            console.log(err);
+            res.status(400);
+        })
+    },
+
+    async searchByCPF(req, res){
+
+        const { cpf } = req.params;
+
+        await Clients.findOne({ where: {
+            cpf: cpf
+        }}).then((client) => {
+            res.status(200);
+            res.json(client);
         }).catch((err) => {
             console.log(err);
             res.status(400);

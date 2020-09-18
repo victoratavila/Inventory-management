@@ -27,6 +27,11 @@ describe('CRUD clients', () => {
         expect(putClient.status).toBe(200);
     });
 
+    it('should search for the client created previously', async () => {
+        const client = await axios.get('http://localhost:8080/clients/12345');
+        expect(client.status).toBe(200);
+    })
+
     it('should delete the client created previosly', async () => {
 
         const deleteClient = await axios.delete('http://localhost:8080/clients/12345');

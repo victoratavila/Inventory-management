@@ -24,7 +24,7 @@
           </svg></button>
 
           
-          <button class="btn btn-outline-success my-2 my-sm-0" type="button" style="float: right;" onclick="teste()" >Buscar</button>
+          <button class="btn btn-outline-success my-2 my-sm-0" type="button" style="float: right;" onclick="openUpdateModal()" >Buscar</button>
           <input class="form-control mr-sm-2" style="float: right;" id = "productToSearch" type="search" autocomplete="off" placeholder="Buscar produtos" aria-label="Search">
        
            
@@ -232,7 +232,7 @@
 }
 
 
-function teste(){
+function openUpdateModal(){
   const search = $('#productToSearch').val();
 
   const slug = slugify(search, {

@@ -36,5 +36,6 @@ router.get('/clients', ClientController.getClients);
 router.post('/clients', ClientController.createClient);
 router.put('/clients', ClientController.updateClient);
 router.delete('/clients/:cpf', ClientController.deleteClient);
+router.get('/clients/:cpf', ClientController.searchByCPF);
 
 module.exports = router;
