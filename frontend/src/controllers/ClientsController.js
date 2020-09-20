@@ -8,7 +8,7 @@ module.exports = {
 
             const data = clients.data;
             const fixedCompanyId = 5;
-            res.render('Clients.ejs', { data, fixedCompanyId })
+            res.render('Clients.ejs', { data, fixedCompanyId });
 
         }).catch((err) => {
             console.log(err);
@@ -25,8 +25,10 @@ module.exports = {
             email: email,
             cpf: parseInt(cpf),
             companyId: companyId
-        }).then(() => {
-            res.redirect('/clientes');
+        }).then((result) => {
+    
+                res.redirect('/clientes');
+
         }).catch((err) => {
             console.log(err);
         })
@@ -42,6 +44,20 @@ module.exports = {
             res.status(400);
             console.log(err);
         })
+    },
+
+    async updateClient(req, res){
+        const { fullName, cpf, email, companyId } = req.body;
+        await axios.put('http://localhost:8080/clients', {
+            fullName: fullName,
+            cpf: cpf,
+            email: email,
+            companyId: companyId
+        }).then(() => {
+            res.redirect('/clientes');
+        }).catch((err) => {
+            console.log(err);
+        })
     }
 
-}
+} 

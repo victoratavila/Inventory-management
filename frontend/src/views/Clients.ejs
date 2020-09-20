@@ -79,6 +79,8 @@
 </table>
 
     </div>
+
+
     
 </body>
 
@@ -104,5 +106,83 @@ function verifyDeletion(event, form){
     })
 
   }
+
+  function verifyUpdating(identifier){     
+  
+  const cpf = $(identifier).data('updateid');
+  axios.get(`http://localhost:8080/clients/${cpf}`).then((product) => {
+
+  var data = product.data;
+
+    $("body").append(`<div class="modal fade" id="updateModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="staticBackdropLabel">Editar cliente</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div> 
+  <div class="modal-body">
+    <form action="/update/client" method="POST">
+      <label for="fullName" style: "color: #f5f5f5">Nome completo</label>
+      <input class = "form-control" required type="text" value = "${data.fullName}" name="fullName" id="fullName" placeholder="Digite o nome aqui" > <br>
+      <label for="email" style: "color: #f5f5f5">Email</label>
+      <input class = "form-control"required  value = "${data.email}"  type="text" name="email" id="email" placeholder="Digite o email aqui">
+      <input class = "form-control" required  value = "${data.cpf}"  style="margin-top: 10px" hidden type="text" name="cpf" id="cpf" placeholder="Categoria">
+      <input class = "form-control" required value = "${data.companyId}" style="margin-top: 10px" hidden type="number" name="companyId" id="companyId" value = "<%= fixedCompanyId %>" >
+      <div class="modal-footer"> <br>
+        <br><br>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id = "cancelUpdate">Cancelar</button>
+        <button type="submit" class="btn btn-warning" id = "finishUpdate">Atualizar cliente</button>
+      </div>
+    </form>
+  </div>
+  
+</div>
+</div>
+</div>`);
+   
+    $('#updateModal').modal('show');
+
+    var btnCancelUpdate = document.getElementById('cancelUpdate');
+    btnCancelUpdate.addEventListener('click', () => {
+
+      var info = document.getElementById("updateModal");
+      if (info.parentNode) {
+      info.parentNode.removeChild(info);
+      }
+
+    })
+
+    var buttonUpdate = document.getElementById('finishUpdate');
+
+    // buttonUpdate.addEventListener('click', () => {
+    //   const fullName = $('#fullName').val();
+    //   const email = $('#email').val();
+    //   const cpf = $('#cpf').val();
+    //   const companyId = $('#newcompanyId').val();
+    //   console.log(email, fullName, cpf, companyId);
+
+    //   axios.put(`http://localhost:8080/clients`, {
+
+    //     fullName: fullName,
+    //     email: email,
+    //     cpf: cpf,
+    //     companyId: data.companyId
+
+    //   }).then(() => {
+    //     location.reload();
+    //   }).catch((err) => {
+    //     console.log(err);
+    //   })
+
+    // })
+
+  }).catch((err) => {
+    console.log(err);
+  })
+
+}
 
 </script>

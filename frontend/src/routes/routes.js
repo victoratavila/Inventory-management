@@ -19,5 +19,6 @@ router.post('/produtos/delete/:id', ProductsController.deleteProduct);
 router.get('/clientes', ClientsController.getClients)
 router.post('/clientes', ClientsController.createClient)
 router.post('/clientes/:cpf', ClientsController.deleteClient);
+router.post('/update/client', ClientsController.updateClient);
 
 module.exports = router;

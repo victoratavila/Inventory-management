@@ -16,18 +16,39 @@ module.exports = {
 
         const { fullName, email, cpf, companyId } = req.body;
 
-        Clients.create({
+        await Clients.findOne({
+            where: {
+                cpf: cpf
+            }
+        }).then((client) => {
 
-            fullName: fullName,
-            email: email,
-            cpf: cpf,
-            companyId: companyId
+            if(client == undefined || client == null){
 
-        }).then(() => {
-            res.json({result: `The client ${fullName} was saved successfully`});
+                Clients.create({
+
+                    fullName: fullName,
+                    email: email,
+                    cpf: cpf,
+                    companyId: companyId
+        
+                }).then(() => {
+                    res.json({result: `The client ${fullName} was saved successfully`});
+                }).catch((err) => {
+                    console.log(err)
+                });
+
+            } else {
+
+                res.status(400);
+                res.json({result: "There is a client already registered with the cpf " + cpf + ", please try a new cpf"});
+            
+            }
+
         }).catch((err) => {
-            console.log(err)
-        });
+            console.log(err);
+        })
+
+  
 
     },
 

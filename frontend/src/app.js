@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const routes = require('./routes/routes');
 const ejs = require('ejs');
-const axios = require('axios');
+// const session = require('express-session');
+// const flash = require('connect-flash');
 
 // Setting static files
 app.use(express.static('public'));
@@ -13,6 +14,17 @@ app.set('view engine', 'ejs');
 // Setting JSON parser
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+
+// // Setting sessions
+// app.use(session({
+//     secret: "inventorymanagementsecretcode",
+//     cookie: { maxAge: 60000 },
+//     resave: false,
+//     saveUninitialized: false
+// }));
+
+// // Setting flash-sessions
+// app.use(flash());
 
 // Setting routes file
 app.use(routes);
