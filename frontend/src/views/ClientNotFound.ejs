@@ -13,7 +13,7 @@
 
         <div class="form-inline">
             <div class = "col col-12">
-              <h2 style="float: left;"> Clientes cadastrados <i style="font-family: Roboto; color: rgba(0, 0, 0, 0.219); font-size: 20px">(<%= data.length %>)</i></h2> <br><br>
+              <h2 style="float: left;"> Clientes cadastrados <i style="font-family: Roboto; color: rgba(0, 0, 0, 0.219); font-size: 20px">(<%= size.length %>)</i></h2> <br><br>
            
         
     
@@ -31,7 +31,7 @@
            
                
               
-            </div>
+            </div>      <button onclick = "backProducts()" class = "btn btn-outline-primary" style="font-size: 20px; font-weight: light; margin-left: -92.5%"> Voltar </button>
           </div> <br>
 
           <table class="table table-striped" style="text-align: center;">
@@ -47,39 +47,22 @@
 
       <tbody>
       
-        <% data.forEach((data) => { %>
-          <tr>
-            <td><%= data.fullName %></td>
-            <td><%= data.email %></td>
-            <td><%= data.cpf %></td>
-            <td>
-              <form action="/clientes/<%= data.cpf %>" onsubmit="verifyDeletion(event, this)" method="POST" style="display: inline;">
-                 
-                <button type="submit" class = "btn btn-danger" name = "idArea" id = "<%= data.cpf %>">
-                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                </svg>
-              </button>
-
-            </form>
-            
-               <button type="button" class = "btn btn-warning" onclick="verifyUpdating(this)" name = "updateBtn" data-updateid ='<%= data.cpf %>' >
-                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                </svg>
-              </button>
-            </td>
-          </tr>
-
-        <% }) %>
-  
   </tbody>
 </table>
 
+
+
+<div class="alert alert-danger" role="alert">
+    <h4 style="text-align: left">Atenção</h4> <hr>
+    <p style = "text-align: left">Não há nenhum cliente cadastrado com o CPF <i style="font-style: normal; font-weight: bold;"><%= cpf %></i>, verifique sua busca e tente novamente. </p>
+  </div>
+
+  <button onclick = "backProducts()" class = "btn btn-outline-primary" style="font-size: 20px; font-weight: light; margin-left: -92.5%"> Voltar </button>
+
     </div>
 
+
+    
 
     
 </body>
@@ -90,6 +73,10 @@
 <%- include('../public/partials/deleteClientModal.ejs') %>
 
 <script>
+
+function backProducts(){
+      window.location.href = `http://localhost:3000/clientes`;
+    }
 
   function searchByCPF(){
     const cpf = $('#productToSearch').val();
@@ -191,8 +178,14 @@ function verifyDeletion(event, form){
 
 }
 
-// Restricts input for the given textbox to the given inputFilter.
-function setInputFilter(textbox, inputFilter) {
+
+
+</script>
+
+
+<script>
+    // Restricts input for the given textbox to the given inputFilter.
+    function setInputFilter(textbox, inputFilter) {
   ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
     textbox.addEventListener(event, function() {
       if (inputFilter(this.value)) {
@@ -212,6 +205,4 @@ function setInputFilter(textbox, inputFilter) {
 
 setInputFilter(document.getElementById("productToSearch"), function(value) {
   return /^\d*$/.test(value); });
-
 </script>
-

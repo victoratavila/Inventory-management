@@ -13,7 +13,7 @@
 
         <div class="form-inline">
             <div class = "col col-12">
-              <h2 style="float: left;"> Clientes cadastrados <i style="font-family: Roboto; color: rgba(0, 0, 0, 0.219); font-size: 20px">(<%= data.length %>)</i></h2> <br><br>
+              <h2 style="float: left;"> Clientes cadastrados <i style="font-family: Roboto; color: rgba(0, 0, 0, 0.219); font-size: 20px">(<%= size.length %>)</i></h2> <br><br>
            
         
     
@@ -25,7 +25,7 @@
                 <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
               </svg></button>
     
-              
+                           
               <button class="btn btn-outline-success my-2 my-sm-0" type="button" style="float: right;" onclick="searchByCPF()" >Buscar</button>
               <input class="form-control mr-sm-2" style="float: right;" id = "productToSearch" type="text" maxlength="11" autocomplete="off" placeholder="Buscar cliente pelo CPF" aria-label="Search">
            
@@ -47,7 +47,6 @@
 
       <tbody>
       
-        <% data.forEach((data) => { %>
           <tr>
             <td><%= data.fullName %></td>
             <td><%= data.email %></td>
@@ -72,8 +71,6 @@
               </button>
             </td>
           </tr>
-
-        <% }) %>
   
   </tbody>
 </table>
@@ -90,6 +87,28 @@
 <%- include('../public/partials/deleteClientModal.ejs') %>
 
 <script>
+
+    // Restricts input for the given textbox to the given inputFilter.
+function setInputFilter(textbox, inputFilter) {
+  ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
+    textbox.addEventListener(event, function() {
+      if (inputFilter(this.value)) {
+        this.oldValue = this.value;
+        this.oldSelectionStart = this.selectionStart;
+        this.oldSelectionEnd = this.selectionEnd;
+      } else if (this.hasOwnProperty("oldValue")) {
+        this.value = this.oldValue;
+        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+      } else {
+        this.value = "";
+      }
+    });
+  });
+}
+
+
+setInputFilter(document.getElementById("productToSearch"), function(value) {
+  return /^\d*$/.test(value); });
 
   function searchByCPF(){
     const cpf = $('#productToSearch').val();
@@ -163,6 +182,8 @@ function verifyDeletion(event, form){
 
     var buttonUpdate = document.getElementById('finishUpdate');
 
+
+
     // buttonUpdate.addEventListener('click', () => {
     //   const fullName = $('#fullName').val();
     //   const email = $('#email').val();
@@ -189,29 +210,8 @@ function verifyDeletion(event, form){
     console.log(err);
   })
 
+
+
 }
-
-// Restricts input for the given textbox to the given inputFilter.
-function setInputFilter(textbox, inputFilter) {
-  ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
-    textbox.addEventListener(event, function() {
-      if (inputFilter(this.value)) {
-        this.oldValue = this.value;
-        this.oldSelectionStart = this.selectionStart;
-        this.oldSelectionEnd = this.selectionEnd;
-      } else if (this.hasOwnProperty("oldValue")) {
-        this.value = this.oldValue;
-        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-      } else {
-        this.value = "";
-      }
-    });
-  });
-}
-
-
-setInputFilter(document.getElementById("productToSearch"), function(value) {
-  return /^\d*$/.test(value); });
 
 </script>
-

@@ -58,6 +58,33 @@ module.exports = {
         }).catch((err) => {
             console.log(err);
         })
+    },
+
+    async searchByCPF(req, res){
+        const { cpf } = req.params;
+
+        axios.get(`http://localhost:8080/clients/${cpf}`).then((client) => {
+            const data = client.data;
+            const fixedCompanyId = 5;
+
+            axios.get('http://localhost:8080/clients').then((response) => {
+            var size = response.data;
+            console.log(size);
+            if(data == null){
+                res.render('ClientNotFound', { data, size, fixedCompanyId, cpf });
+            } else {
+                res.render('ClientFound', { data, size, fixedCompanyId, cpf });
+            }
+
+            console.log(data);
+
+        }).catch((err) => {
+            console.log(err);
+        })
+
+        }).catch((err) => {
+            console.log(err);
+        })
     }
 
 } 
