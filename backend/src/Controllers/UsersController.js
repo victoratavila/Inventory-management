@@ -36,7 +36,8 @@ module.exports = {
     
         await Users.findAll({ where: { companyId: companyId }}).then((users) => {
            if(users == null || users == '[]' || users == undefined || users == ''){
-               res.json({result: "The company " + companyId + " have no registered users yet"});
+              res.status(200);
+              res.json(users);
            } else {
                res.json(users);
            }

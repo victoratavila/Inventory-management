@@ -8,7 +8,15 @@ module.exports = {
         const fixedCompanyId = 5;
         axios.get('http://localhost:8080/user/' + fixedCompanyId).then((users) => {
             const data = users.data;
-            res.render('Access', { fixedCompanyId, data });
+
+            if(data == null || data == undefined || data == "" || data == []){
+                var empty = true;
+            } else {
+                var empty = false;
+            }
+
+            console.log(data);
+            res.render('Access', { fixedCompanyId, data, empty });
         }).catch((err) => {
             console.log(err);
         });
