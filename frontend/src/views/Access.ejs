@@ -1,0 +1,74 @@
+<%- include('../public/partials/Header.ejs') %>
+
+<body>
+    
+<%- include('../public/partials/Sidebar.ejs') %>
+</section>
+    
+<div class = "mainArea"> 
+ 
+    <div class="jumbotron" style="background-color:#f1f1f1; text-align: left;">
+        <h1 class="display-4" style="font-family: Roboto; font-weight: 400; ">Área de acessos</h1>
+        <p class="lead">Defina aqui quem pode ter acesso ao seu sistema de estoque.</p>
+        <hr class="my-4">
+        <a class="btn btn-primary btn-lg" href="#" id = "createNewUser" role="button">Definir novo acesso</a>
+      </div>
+
+      <ul class="list-unstyled" style="text-align: left; margin-left: 30px; margin-top: -40px">
+
+        <% data.forEach((data) => { %>
+
+        <li class="media">
+        <svg width="4em" height="4em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+          <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+          <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+        </svg>
+        <div class="media-body" style="margin-left: 10px">
+          <h5 class="mt-0 mb-1"> <%= data.username %> </h5>
+          <p>Email: <%= data.email %></p>
+          <p style = "margin-top: -15px"> Password: <%= data.password %> </p>
+          <p style = "margin-top: -15px"> <% if(data.admin == true){ data.admin = 'Sim'} else { data.admin = 'Não'} %>Administrador: <%= data.admin %> </p>
+        </div>
+
+        <form action= '/acessos/<%= data.id %>'method = "POST" >
+        <button class = "btn btn-outline-danger" type="submit" onclick="verifyDeletion(event, this)" data-user = '<%= data.id %>' >Remover acesso</button> 
+        </form>
+
+      </li> <hr><br>
+
+       <% }) %>
+     
+       </ul>
+
+</div>
+
+    
+
+</body>
+
+
+<%- include('../public/partials/NewUserModal.ejs') %>
+<%- include('../public/partials/DeleteUserModal.ejs') %>
+<%- include('../public/partials/Footer.ejs') %>
+
+
+<script>
+
+  $('#createNewUser').click(() => {
+    $('#createUserModal').modal('show');
+  });
+
+  function verifyDeletion(event, form){
+    event.preventDefault();
+    $('#deleteUserModal').modal('show');
+
+    var deleteBtn = document.getElementById('delete');
+  
+    deleteBtn.addEventListener('click', () => {
+      form.submit();
+    })
+
+  }
+
+</script>

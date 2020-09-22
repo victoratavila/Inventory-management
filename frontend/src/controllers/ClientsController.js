@@ -69,14 +69,12 @@ module.exports = {
 
             axios.get('http://localhost:8080/clients').then((response) => {
             var size = response.data;
-            console.log(size);
+    
             if(data == null){
                 res.render('ClientNotFound', { data, size, fixedCompanyId, cpf });
             } else {
                 res.render('ClientFound', { data, size, fixedCompanyId, cpf });
             }
-
-            console.log(data);
 
         }).catch((err) => {
             console.log(err);

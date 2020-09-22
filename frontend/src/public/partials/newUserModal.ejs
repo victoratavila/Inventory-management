@@ -1,0 +1,52 @@
+<div class="modal fade" id="createUserModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Definir novo acesso</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="/acessos" method="post">
+
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Nome</label>
+                  <input type="text" required class="form-control" autocomplete="off" name = "username" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Email</label>
+                  <input type="email" required class="form-control" autocomplete="off" name = "email" id="exampleInputPassword1">
+                </div>
+
+                <div class="form-group" hidden>
+                    <label for="exampleInputPassword1">companyId</label>
+                    <input type="number" value = "<%= fixedCompanyId %>" autocomplete="off" name = "companyId" required class="form-control" id="exampleInputPassword1">
+                  </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Senha</label>
+                    <input type="password" required class="form-control" autocomplete="off" name = "password" id="exampleInputPassword1">
+                  </div>
+                  <small id="emailHelp" class="form-text text-muted">Essa senha é temporária e deve ser alterada posteriormente pelo usuário.</small><br>
+                 
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect1">Acesso de administrador</label>
+                    <select class="form-control" autocomplete="off" name = "admin" id="exampleFormControlSelect1">
+                      <option>Sim</option>
+                      <option>Não</option>
+                    </select>
+                  </div> <br>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                 
+                </div>
+              </form>
+        </div>
+   
+      </div>
+    </div>
+  </div>

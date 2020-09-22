@@ -30,6 +30,7 @@ router.get('/company/:id', CompanyController.getCompanyById);
 router.get('/user', UsersController.getUser);
 router.post('/user', UsersController.createUser);
 router.get('/user/:companyId', UsersController.searchByCompanyId);
+router.delete('/user/:id', UsersController.deleteUser);
 
 // Client routes
 router.get('/clients', ClientController.getClients);

@@ -16,11 +16,12 @@ module.exports = {
     },
 
     async createUser(req, res){
-        const { username, email, password, companyId } = req.body;
+        const { username, email, password, companyId, admin } = req.body;
         await Users.create({
             username: username,
             email: email,
             password: password,
+            admin: admin,
             companyId: companyId
         }).then(() => {
             res.json({result: "New user successfully created"});
@@ -35,13 +36,22 @@ module.exports = {
     
         await Users.findAll({ where: { companyId: companyId }}).then((users) => {
            if(users == null || users == '[]' || users == undefined || users == ''){
-               console.log(users)
                res.json({result: "The company " + companyId + " have no registered users yet"});
            } else {
                res.json(users);
            }
         }).catch((err) => {
             res.status(400);
+        })
+    },
+
+    async deleteUser(req, res){
+        const { id } = req.params;
+
+        Users.destroy({ where: { id: id }}).then(() => {
+            res.json({result: 'user successfully deleted'});
+        }).catch((err) => {
+            console.log(err);
         })
     }
     

@@ -23,6 +23,11 @@ const Users = connection.define('users', {
         type: Sequelize.STRING,
         allowNull: false
         
+    }, 
+
+    admin: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
     }
 
 });

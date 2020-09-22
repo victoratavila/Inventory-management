@@ -213,5 +213,8 @@ function setInputFilter(textbox, inputFilter) {
 setInputFilter(document.getElementById("productToSearch"), function(value) {
   return /^\d*$/.test(value); });
 
+setInputFilter(document.getElementById("cpf"), function(value) {
+return /^\d*$/.test(value); });
+
 </script>
 

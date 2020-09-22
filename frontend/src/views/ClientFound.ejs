@@ -108,7 +108,10 @@ function setInputFilter(textbox, inputFilter) {
 
 
 setInputFilter(document.getElementById("productToSearch"), function(value) {
-  return /^\d*$/.test(value); });
+return /^\d*$/.test(value); });
+
+setInputFilter(document.getElementById("cpf"), function(value) {
+return /^\d*$/.test(value); });
 
   function searchByCPF(){
     const cpf = $('#productToSearch').val();

@@ -4,6 +4,7 @@ const LoginController = require('../controllers/LoginController');
 const DashboardController = require('../controllers/DashboardController');
 const ProductsController = require('../controllers/ProductsController.js');
 const ClientsController = require('../controllers/ClientsController.js');
+const AccessController = require('../controllers/AccessController');
 const axios = require('axios');
 
 // Render login form
@@ -21,5 +22,10 @@ router.post('/clientes', ClientsController.createClient)
 router.post('/clientes/:cpf', ClientsController.deleteClient);
 router.get('/clientes/:cpf', ClientsController.searchByCPF);
 router.post('/update/client', ClientsController.updateClient);
+
+// Rotas de acessos
+router.get('/acessos', AccessController.getAllowed);
+router.post('/acessos', AccessController.createUser);
+router.post('/acessos/:id', AccessController.deleteUser);
 
 module.exports = router;

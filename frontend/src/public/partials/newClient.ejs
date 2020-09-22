@@ -14,10 +14,18 @@
             <input class = "form-control" required style="margin-top: 10px" type="email" name="email" id="email" placeholder="Email">
             <input class = "form-control" required style="margin-top: 10px" maxlength="11" type="text" name="cpf" id="cpf" placeholder="CPF">
             <input class = "form-control" required style="margin-top: 10px" hidden type="number" name="companyId" id="companyId" value = "<%= fixedCompanyId %>" placeholder="Peso">
-            <div class="modal-footer"> <br>
-              <br>
-              <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Criar</button>
+            <div class="modal-footer"> 
+        
+              <div class="alert alert-warning" role="alert">
+                O CPF não poderá ser alterado futuramente, revise o campo antes de cadastrar um novo cliente.
+              </div>
+
+              <br><br>
+              <div class = "form-inline" style="margin-top: 10px;">
+                <button type="submit" class="btn btn-secondary" style="margin-right: 10px; width: 150px;" data-dismiss="modal">Cancelar</button>
+                <button type="submit" style="width: 150px;" class="btn btn-primary">Criar</button>
+              </div>
+            
             </div>
           </form>
         </div>
@@ -25,3 +33,4 @@
       </div>
     </div>
   </div>
+
