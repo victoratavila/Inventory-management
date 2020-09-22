@@ -2,8 +2,6 @@ const express = require('express');
 const app = express();
 const routes = require('./routes/routes');
 const ejs = require('ejs');
-// const session = require('express-session');
-// const flash = require('connect-flash');
 
 // Setting static files
 app.use(express.static('public'));

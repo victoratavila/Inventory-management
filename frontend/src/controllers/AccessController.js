@@ -8,7 +8,6 @@ module.exports = {
         const fixedCompanyId = 5;
         axios.get('http://localhost:8080/user/' + fixedCompanyId).then((users) => {
             const data = users.data;
-            console.log(data);
             res.render('Access', { fixedCompanyId, data });
         }).catch((err) => {
             console.log(err);
@@ -37,8 +36,7 @@ module.exports = {
         }).catch((err) => {
             console.log(err);
         })
-
-       console.log(username,email,password,companyId, admin)
+        
     },
 
     async deleteUser(req, res){
