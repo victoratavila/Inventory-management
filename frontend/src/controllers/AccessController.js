@@ -14,8 +14,7 @@ module.exports = {
             } else {
                 var empty = false;
             }
-
-            console.log(data);
+            
             res.render('Access', { fixedCompanyId, data, empty });
         }).catch((err) => {
             console.log(err);
