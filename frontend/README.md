@@ -2,7 +2,7 @@
 Software desevolvido com o intuito de relacionar empresas e suas respectivas informações, como produtos, clientes e vendas.
 
 ### View de produtos
-![View de produtos](https://i.imgur.com/DvF6EKo.png)
+![Imgur](https://i.imgur.com/EqUa335.png)
 
 ### Como foi desenvolvido?
 * **Backend**: Uma API REST desenvolvida com Node.js e com o framework Express, que se comunica com um banco de dados relacional (mySQL) através do ORM Sequelize, e retorna os respectivos dados baseados em suas requisições.

@@ -43,8 +43,8 @@
               <p style = "margin-top: -15px"> <% if(data.admin == true){ data.admin = 'Sim'} else { data.admin = 'Não'} %>Administrador: <%= data.admin %> </p>
             
               <form action= '/acessos/<%=data.id %>' method = "POST" >
-                <button class = "btn btn-outline-danger" type="submit" onclick="verifyDeletion(event, this)" data-user = '<%= data.id %>' >Remover acesso</button> 
-                </form>
+                  <button class = "btn btn-outline-danger" type="submit" onclick="verifyDeletion(event, this)" data-user = '<%= data.id %>' >Remover acesso</button> 
+              </form>
             
             </div>
     
@@ -77,20 +77,21 @@
     $('#createUserModal').modal('show');
   });
 
-  // function verifyDeletion(event, form){
-  //   event.preventDefault();
-  //   $('#deleteUserModal').modal('show');
-
-  //   var deleteUserBtn = document.getElementById('deleteUserBtn');
-  
-  //   deleteUserBtn.addEventListener('click', () => {
-  //     form.submit();
-  //   })
-
-  // }
 
   $('#helpBtn').click(() => {
     $('#helpModal').modal('show');
   })
+
+  // function verifyDeletion(event, form){
+  //   event.preventDefault();
+  //   $('#deleteUserModal').modal('show');
+    
+  //   var btnDeleteAccess = document.getElementById('dlt');
+
+  //   btnDeleteAccess.addEventListener('click', () => {
+  //     HTMLFormElement.prototype.submit.call(form)
+  //   })
+
+  // }
 
 </script>

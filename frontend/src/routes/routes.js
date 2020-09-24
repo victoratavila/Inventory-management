@@ -5,6 +5,7 @@ const DashboardController = require('../controllers/DashboardController');
 const ProductsController = require('../controllers/ProductsController.js');
 const ClientsController = require('../controllers/ClientsController.js');
 const AccessController = require('../controllers/AccessController');
+const SellingsController = require('../controllers/SellingsController');
 const axios = require('axios');
 
 // Render login form
@@ -27,5 +28,8 @@ router.post('/update/client', ClientsController.updateClient);
 router.get('/acessos', AccessController.getAllowed);
 router.post('/acessos', AccessController.createUser);
 router.post('/acessos/:id', AccessController.deleteUser);
+
+// Rotas de vendas
+router.get('/vendas', SellingsController.getAll);
 
 module.exports = router;

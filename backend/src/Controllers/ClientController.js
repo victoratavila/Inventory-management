@@ -4,7 +4,9 @@ module.exports = {
 
     async getClients(req, res){
 
-        await Clients.findAll().then((clients) => {
+        const { companyId } = req.params;
+
+        await Clients.findAll({ where: { companyId: companyId }}).then((clients) => {
             res.json(clients);
             
         }).catch((err) => {

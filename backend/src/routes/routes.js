@@ -5,9 +5,11 @@ const ProductController = require('../Controllers/ProductsController');
 const CompanyController = require('../Controllers/CompaniesController');
 const UsersController = require('../Controllers/UsersController');
 const ClientController = require('../Controllers/ClientController');
+const SellingsController = require('../Controllers/SellingsController');
 const Company = require('../models/Companies');
 const Users = require('../models/Users');
 const Clients = require('../models/Clients');
+const Sellings = require('../models/Sellings');
 
 // Product routes
 router.get('/products', ProductController.getProducts);
@@ -33,10 +35,14 @@ router.get('/user/:companyId', UsersController.searchByCompanyId);
 router.delete('/user/:id', UsersController.deleteUser);
 
 // Client routes
-router.get('/clients', ClientController.getClients);
+router.get('/clients/:companyId', ClientController.getClients);
 router.post('/clients', ClientController.createClient);
 router.put('/clients', ClientController.updateClient);
 router.delete('/clients/:cpf', ClientController.deleteClient);
 router.get('/clients/:cpf', ClientController.searchByCPF);
+
+// Selling routes
+router.get('/sellings/:companyId', SellingsController.getAll);
+router.post('/sellings/:companyId', SellingsController.saveSelling);
 
 module.exports = router;
