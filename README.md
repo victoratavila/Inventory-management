@@ -1,5 +1,4 @@
-### View de produtos
-# Sistema de estoque :moneybag::credit_card:
+### Sistema de estoque :moneybag::credit_card:
 Software desevolvido com o intuito de relacionar empresas e suas respectivas informações, como produtos, clientes e vendas.
 
 ### View de produtos
