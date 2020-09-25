@@ -5,7 +5,11 @@ module.exports = {
     async getAll(req, res){
         const { companyId } = req.params;
 
-        await Sellings.findAll({ where: { companyId: companyId }}).then(sellings => {
+        await Sellings.findAll({ where: { companyId: companyId },
+         order: [
+            ['id', 'DESC']
+        ]
+    }).then(sellings => {
             res.json(sellings);
         }).catch((err) => {
             console.log(err);

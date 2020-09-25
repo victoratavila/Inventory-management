@@ -5,14 +5,131 @@
 <%- include('../public/partials/Sidebar.ejs') %>
 
     
-<div class = "mainArea"> 
- 
+<div class = "mainArea">  <br><br>
+    
+    <div class="form-inline">
+        <div class = "col col-12">
+          <h2 style="float: left;"> Vendas realizadas <i style="font-family: Roboto; color: rgba(0, 0, 0, 0.219); font-size: 20px">(<%= data.length %>)</i></h2> <br><br>
+        </div> 
 
+       
+        <div class = "col col-12">
+          <button class = "btn btn-primary" type = "button" onclick = "openModal()" style="float: left; width: 160px;" > Nova venda <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+          </svg></button>
 
+          
+          <button class="btn btn-outline-success my-2 my-sm-0" type="button" style="float: right;" onclick="searchByCPF()" >Buscar</button>
+          <input class="form-control mr-sm-2" style="float: right;" id = "productToSearch" type="text" maxlength="11" autocomplete="off" placeholder="Buscar venda" aria-label="Search">
+       
+          
+        </div>
+      </div> <br> <br>
+
+      <div class="float-left">
+
+        <% data.forEach(data => { %>
+          
+          <div class = "sellingField">
+
+            <div class = "sellingText"> <br>
+              <h4 class = "soldProducts"> <%= data.itens %> </h4>
+              <h1 style = "margin-left: 20px; font-weight: bold; color: rgb(6, 173, 6)">+ R$<%= data.totalValue %></h1>
+
+              <div class = "float-right" style="margin-right: 20px">
+                <button class = "btn btn-primary">Ver detalhes</button>
+                <button class = "btn btn-danger">Deletar venda</button>
+              </div>
+
+              <div class = "float-left">
+                <h5 class = "sellingCode">Código: #<%= data.id %></h5>
+              </div>
+            
+            </div>
+          
+          </div> <br>
+
+        <% }) %>
+        
+         
+      </div> 
+
+</div>
+
+    <!-- Modal -->
+<div class="modal fade" id="newSellingModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Cadastrar nova venda</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         
+        <form>
+
+         
+
+           <div class="form-group">
+           <label for="exampleFormControlSelect1">Selecione o cliente <i>(opcional)</i></label>
+            <select class="form-control" id="exampleFormControlSelect1">
+              <option selected>Clique aqui</option>
+              <% clientData.forEach(clientData => { %>
+              <option> <%= clientData.fullName %> (<%=clientData.cpf%>) </option>
+               <% }) %>
+            </select>
+          </div>
+
+          <div class = "form-group">
+            <label for="selectProducts">Selecione o(s) produto(s)</label>
+
+            <div id="list1" class="dropdown-check-list" tabindex="100">
+              <span class="anchor">Select Fruits</span>
+              <ul class="items">
+                <li><input type="checkbox" />Apple </li>
+                <li><input type="checkbox" />Orange</li>
+                <li><input type="checkbox" />Grapes </li>
+                <li><input type="checkbox" />Berry </li>
+                <li><input type="checkbox" />Mango </li>
+                <li><input type="checkbox" />Banana </li>
+                <li><input type="checkbox" />Tomato</li>
+              </ul>
+            </div>
+          
+          
+        
+          </div>
+
+     
+        
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
 </div>
 
     
 
 </body>
+
+<script>
+  function openModal(){
+    $('#newSellingModal').modal('show')
+  }
+
+  var checkList = document.getElementById('list1');
+checkList.getElementsByClassName('anchor')[0].onclick = function(evt) {
+  if (checkList.classList.contains('visible'))
+    checkList.classList.remove('visible');
+  else
+    checkList.classList.add('visible');
+}
+</script>
 
 <%- include('../public/partials/Footer.ejs') %>
