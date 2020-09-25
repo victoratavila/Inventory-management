@@ -39,7 +39,7 @@ router.get('/clients/:companyId', ClientController.getClients);
 router.post('/clients', ClientController.createClient);
 router.put('/clients', ClientController.updateClient);
 router.delete('/clients/:cpf', ClientController.deleteClient);
-router.get('/clients/:cpf', ClientController.searchByCPF);
+router.get('/clients/:companyId/:cpf', ClientController.searchByCPF);
 
 // Selling routes
 router.get('/sellings/:companyId', SellingsController.getAll);

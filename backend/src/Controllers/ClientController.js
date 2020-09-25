@@ -110,10 +110,11 @@ module.exports = {
 
     async searchByCPF(req, res){
 
-        const { cpf } = req.params;
+        const { companyId, cpf } = req.params;
 
         await Clients.findOne({ where: {
-            cpf: cpf
+            cpf: cpf,
+            companyId: companyId
         }}).then((client) => {
             res.status(200);
             res.json(client);

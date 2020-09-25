@@ -3,8 +3,8 @@ const axios = require('axios');
 module.exports = {
 
     async getClients(req, res){
-
-        axios.get('http://localhost:8080/clients').then((clients) => {
+        const fixedCompanyId = 5;
+        axios.get('http://localhost:8080/clients/'+fixedCompanyId).then((clients) => {
 
             const data = clients.data;
             const fixedCompanyId = 5;
@@ -63,11 +63,11 @@ module.exports = {
     async searchByCPF(req, res){
         const { cpf } = req.params;
 
-        axios.get(`http://localhost:8080/clients/${cpf}`).then((client) => {
+        axios.get(`http://localhost:8080/clients/5/${cpf}`).then((client) => {
             const data = client.data;
             const fixedCompanyId = 5;
 
-            axios.get('http://localhost:8080/clients').then((response) => {
+            axios.get('http://localhost:8080/clients/'+fixedCompanyId).then((response) => {
             var size = response.data;
     
             if(data == null){
