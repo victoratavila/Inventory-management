@@ -3,7 +3,7 @@ const axios = require('axios');
 describe('CRUD clients', () => {
 
     it('should get all clients', async () => {
-        const getClients = await axios.get('http://localhost:8080/clients');
+        const getClients = await axios.get('http://localhost:8080/clients/5');
         expect(getClients.status).toBe(200);
     })
 

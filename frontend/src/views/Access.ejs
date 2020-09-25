@@ -39,7 +39,7 @@
             <div class="media-body" id = "userBoard" style="margin-left: 20px">
               <h5 class="mt-0 mb-1"> <%= data.username %> </h5>
               <p>Email: <%= data.email %></p>
-              <p style = "margin-top: -15px"> Senha: <%= data.password %> </p>
+              <p style = "margin-top: -15px" type = "password"> Senha: <%= data.password %> </p>
               <p style = "margin-top: -15px"> <% if(data.admin == true){ data.admin = 'Sim'} else { data.admin = 'Não'} %>Administrador: <%= data.admin %> </p>
             
               <form action= '/acessos/<%=data.id %>' method = "POST" >
