@@ -16,7 +16,9 @@ module.exports = {
 
     async createClient(req, res){
 
-        const { fullName, email, cpf, companyId } = req.body;
+        const { fullName, cpf, companyId } = req.body;
+        var { email } = req.body;
+        var email = email.toLowerCase();
 
         await Clients.findOne({
             where: {
@@ -55,7 +57,11 @@ module.exports = {
     },
 
     async updateClient(req, res){
-        const { fullName, cpf, email, companyId } = req.body;
+
+        const { fullName, cpf, companyId } = req.body;
+        var { email } = req.body;
+        var email = email.toLowerCase();
+        
         Clients.findOne({ 
             where: {
                 cpf: cpf
