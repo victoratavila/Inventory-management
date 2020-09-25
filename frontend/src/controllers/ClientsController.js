@@ -8,7 +8,14 @@ module.exports = {
 
             const data = clients.data;
             const fixedCompanyId = 5;
-            res.render('Clients.ejs', { data, fixedCompanyId });
+
+            if(data == null || data == undefined || data == "" || data == []){
+                var empty = true;
+            } else {
+                var empty = false;
+            }
+
+            res.render('Clients.ejs', { data, fixedCompanyId, empty });
 
         }).catch((err) => {
             console.log(err);
@@ -67,13 +74,19 @@ module.exports = {
             const data = client.data;
             const fixedCompanyId = 5;
 
+            if(data == null || data == undefined || data == "" || data == []){
+                var empty = true;
+            } else {
+                var empty = false;
+            }
+
             axios.get('http://localhost:8080/clients/'+fixedCompanyId).then((response) => {
             var size = response.data;
     
             if(data == null){
-                res.render('ClientNotFound', { data, size, fixedCompanyId, cpf });
+                res.render('ClientNotFound', { data, size, fixedCompanyId, cpf, empty });
             } else {
-                res.render('ClientFound', { data, size, fixedCompanyId, cpf });
+                res.render('ClientFound', { data, size, fixedCompanyId, cpf, empty });
             }
 
         }).catch((err) => {
