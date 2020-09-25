@@ -114,9 +114,9 @@ function verifyDeletion(event, form){
   }
 
   function verifyUpdating(identifier){     
-  
+  const fixedCompanyId = 5;
   const cpf = $(identifier).data('updateid');
-  axios.get(`http://localhost:8080/clients/${cpf}`).then((product) => {
+  axios.get(`http://localhost:8080/clients/${fixedCompanyId}/${cpf}`).then((product) => {
 
   var data = product.data;
 
