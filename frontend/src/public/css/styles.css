@@ -153,14 +153,14 @@ thead {
 }
 
 .sellingField {
-  background: white;
-  max-width: 78.7%;
-  width: 900px;
+  background: rgba(255, 255, 255, 0.377);
+  /* max-width: 78.7%; */
+  width: 1030px;
   height: 170px;
   text-align: left;
   border-radius: 20px;
   box-shadow: -1px 5px 20px rgba(0, 0, 0, 0.198);
-  margin-left: 17vh
+  margin-left: 2vh
 
 }
 

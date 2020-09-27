@@ -32,5 +32,6 @@ router.post('/acessos/:id', AccessController.deleteUser);
 // Rotas de vendas
 router.get('/vendas', SellingsController.getAll);
 router.post('/vendas', SellingsController.saveSelling);
+router.get('/registrar/venda', SellingsController.newSellingView);
 
 module.exports = router;

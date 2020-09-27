@@ -1,0 +1,91 @@
+<%- include('../public/partials/Header.ejs') %>
+
+<body>
+    
+<%- include('../public/partials/Sidebar.ejs') %>
+</section>
+
+    
+<div class = "mainArea"> <br> <br>
+
+    <h1 class = "float-left">Registrar venda</h1> <br><br> <hr>
+ 
+    <form action="" method="POST"> 
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect1" class = "float-left">Selecione o cliente <i>(opcional)</i></label>
+             <select class="form-control" id="exampleFormControlSelect1" style="width: 100%">
+               <option selected>Clique aqui</option>
+               <% clientData.forEach(clientData => { %>
+               <option> <%= clientData.fullName %> (<%=clientData.cpf%>) </option>
+                <% }) %>
+             </select>
+           </div>
+
+           <div class="form-group">
+            <label for="exampleFormControlTextarea1" class = "float-left">Produtos vendidos</label>
+            <textarea class="form-control" placeholder="Nenhum produto adicionado ainda, clique no botão abaixo para selecionar." id="exampleFormControlTextarea1" rows="3"></textarea>
+            <button class = "btn btn-primary float-left" onclick = "showProducts()" type="button" style="margin-top: 05px"> Adicionar produtos + </button>
+          </div>
+
+    </form>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="productsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Selecione os produtos vendidos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <% productData.forEach(productData => { %>
+
+          <div class="form-check" style="margin-top: 10px">
+            <input class="form-check-input" type="checkbox" value="" name = "defaultCheck1" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1" >
+              <%= productData.name %> <i style="font-style: normal; color: rgba(0, 0, 0, 0.233);">|</i> R$ <%= productData.price %> 
+            </label>
+          </div>
+          
+        <% }) %>
+  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick = "getChecked()">Adicionar produtos </button>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+
+</body>
+
+<script>
+
+  function showProducts(){
+    $('#productsModal').modal('show')
+  }
+
+  function getChecked(){
+    var favorite = [];
+            $.each($("input[name='defaultCheck1']:checked"), function(){
+                favorite.push($(this).val());
+            });
+            alert("My favourite sports are: " + favorite.join(", "));
+
+  }
+
+
+</script>
+
+
+
+<%- include('../public/partials/Footer.ejs') %>
